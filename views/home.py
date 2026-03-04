@@ -33,7 +33,7 @@ with col2:
 st.divider()
 
 
-st.info("💡 **Anleitung:** Nutze das Menü auf der linken Seite, um zum **Bakterien-Rechner oder zum Mikrobieller-Rechner** zu navigieren.")
+st.info("💡 **Anleitung:** Nutze das Menü auf der linken Seite, um zum **Bakterien-Rechner** zu navigieren.")
 
 
 st.caption("© 2026 | Fachbereich Informatik 2 | ZHAW Life Sciences")
