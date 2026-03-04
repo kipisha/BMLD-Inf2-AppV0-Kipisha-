@@ -1,44 +1,60 @@
 import streamlit as st
 import pandas as pd
-
+import plotly.express as px 
 from functions.calculations import calculate_bacterial_growth, get_growth_steps
 
+st.title("🧫 Bakterien-Wachstums-Simulator")
 
-st.title("🧫 Bakterien-Rechner")
 
-st.info("""
-**🔬 Biologisches Prinzip:**  
-Dieses Tool nutzt das Modell des exponentiellen Wachstums: $N_t = N_0 \cdot 2^{(t/g)}$. 
-Stelle sicher, dass Zeit ($t$) und Generationszeit ($g$) in der **gleichen Einheit** (hier: Minuten) angegeben werden.
-""")
+st.sidebar.header("Parameter anpassen")
+n0 = st.sidebar.slider("Startanzahl ($N_0$)", 1, 1000, 100)
+t = st.sidebar.slider("Beobachtungszeit (min)", 0, 500, 120)
+g = st.sidebar.slider("Generationszeit (min)", 10, 100, 20)
 
-with st.expander("❓ Hilfe zur Eingabe & Beispiele"):
-    st.write("""
-    Hier sind einige Richtwerte für die **Generationszeit (g)** bei 37°C:
-    *   **E. coli:** 20 Minuten
-    *   **B. subtilis:** 26 Minuten
-    *   **S. aureus:** 30 Minuten
-    
-    *Hinweis: Wenn die Temperatur sinkt, erhöht sich die Generationszeit massiv!*
+
+nt, n_gen = calculate_bacterial_growth(n0, t, g)
+times, counts = get_growth_steps(n0, t, g)
+
+
+df = pd.DataFrame({
+    "Zeit (Minuten)": times,
+    "Bakterienanzahl": counts
+})
+
+
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.metric(label="Endanzahl Bakterien", value=f"{int(nt):,}")
+with col2:
+    st.metric(label="Anzahl Generationen", value=f"{round(n_gen, 1)}")
+with col3:
+
+    growth_rate = ((nt - n0) / n0) * 100 if n0 > 0 else 0
+    st.metric(label="Wachstum", value=f"+{int(growth_rate)}%", delta="Exponential")
+
+st.divider()
+
+
+st.subheader("Wachstumskurve")
+
+
+fig = px.area(df, x="Zeit (Minuten)", y="Bakterienanzahl", 
+              title="Exponentielles Wachstum über Zeit",
+              template="plotly_white",
+              color_discrete_sequence=['#00CC96']) 
+
+fig.update_layout(
+    xaxis_title="Zeit in Minuten",
+    yaxis_title="Anzahl der Zellen",
+    hovermode="x unified"
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+
+with st.expander("🔬 Biologische Erklärung & Formel"):
+    st.write(f"""
+    Das Modell berechnet die Zellzahl nach der Formel: $N_t = {n0} \cdot 2^{{({t}/{g})}}$.
+    Aktuell haben wir ca. **{round(n_gen, 1)} Verdopplungszyklen** durchlaufen.
     """)
-
-
-
-with st.form("my_form"):
-        n0 = st.number_input("Startanzahl", value=100)
-        t = st.number_input("Zeit (min)", value=120)
-        g = st.number_input("Generationszeit (min)", value=20)
-        submit = st.form_submit_button("Rechnen")
-
-        
-if submit:
-
-            nt, n_gen = calculate_bacterial_growth(n0, t, g)
-        
-            st.metric("Ergebnis", f"{int(nt)} Bakterien")
-        
-            times, counts = get_growth_steps(n0, t, g)
-            df = pd.DataFrame({"Zeit": times, "Anzahl": counts})
-            st.bar_chart(df.set_index("Zeit"))
-
-
