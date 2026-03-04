@@ -14,24 +14,24 @@ data = {
 }
 df_bakterien = pd.DataFrame(data)
 
-def show():
-    st.title("🧫 CellCompute | Bakterien-Datenbank")
+
+st.title("🧫 CellCompute | Bakterien-Datenbank")
     
-    st.markdown("""
+st.markdown("""
     Wähle einen Organismus aus der Datenbank aus. Die Generationszeit ($g$) wird 
     automatisch für die Berechnung übernommen.
     """)
 
 
 
-    st.subheader("Bakterien-Katalog")
-    selected_organism = st.selectbox("Suche in der Datenbank:", df_bakterien["Organismus"])
+st.subheader("Bakterien-Katalog")
+selected_organism = st.selectbox("Suche in der Datenbank:", df_bakterien["Organismus"])
     
 
-    g_aus_liste = df_bakterien[df_bakterien["Organismus"] == selected_organism]["Generationszeit_min"].values[0]
+g_aus_liste = df_bakterien[df_bakterien["Organismus"] == selected_organism]["Generationszeit_min"].values[0]
 
 
-    with st.form("pro_calc"):
+with st.form("pro_calc"):
         col1, col2 = st.columns(2)
         with col1:
             n0 = st.number_input("Startanzahl (N0)", value=100)
@@ -42,7 +42,7 @@ def show():
         
         submit = st.form_submit_button("Wachstum berechnen")
 
-    if submit:
+if submit:
 
         nt, n_gen = calculate_bacterial_growth(n0, t, g)
         st.success(f"Ergebnis für {selected_organism}: {int(nt):,} Bakterien")

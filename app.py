@@ -7,4 +7,5 @@ pg = st.navigation([
     st.Page("views/unterseite_a.py", title="Zusatz-Rechner", icon="📊")
 ])
 
+
 pg.run()
