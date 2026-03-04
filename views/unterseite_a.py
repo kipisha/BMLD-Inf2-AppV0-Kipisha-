@@ -51,4 +51,3 @@ if submit:
         times, counts = get_growth_steps(n0, t, g)
         chart_df = pd.DataFrame({"Zeit": times, "Anzahl": counts})
         st.line_chart(chart_df.set_index("Zeit"))
-
