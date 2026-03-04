@@ -2,7 +2,7 @@
 import streamlit as st
 
 
-st.title("🧬 Biomedizinischer Bakterien-Rechner")
+st.title(" CellCompute :  Digitaler Bakterien-Rechner 🧫")
 
 
 st.markdown("""
@@ -15,7 +15,7 @@ interaktiv zu simulieren und zu visualisieren.
 st.divider()
 
 
-st.header("👤 Autoren & Mitwirkende")
+st.header(" Autoren 👩‍🔬")
 col1, col2 = st.columns(2)
 
 with col1:
