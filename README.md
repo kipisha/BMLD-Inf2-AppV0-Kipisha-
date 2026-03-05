@@ -10,7 +10,7 @@ Dieses Projekt wurde im Rahmen des Moduls **Informatik 2 (BMLD)** an der ZHAW en
 
 * **Interaktiver Rechner:** Eingabe von Startanzahl ($N_0$), Zeit ($t$) und Generationszeit ($g$).
 * **Visualisierung:** Automatisches Balkendiagramm des Wachstumsverlaufs.
-* **Labortools:** Zusätzlicher Verdünnungsrechner für die Probenvorbereitung.
+
 
 
 * **Framework:** Streamlit (Python)
@@ -18,10 +18,6 @@ Dieses Projekt wurde im Rahmen des Moduls **Informatik 2 (BMLD)** an der ZHAW en
 * **Elemente:** Nutzt `st.form`, `st.metric`, `st.bar_chart`, `st.navigation` und weitere API-Features.
 
 
-1. Repository klonen oder ZIP entpacken.
-2. Notwendige Bibliotheken installieren:
-   ```bash
-   pip install streamlit pandas numpy
 
 
 
