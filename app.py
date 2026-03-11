@@ -1,5 +1,10 @@
+import pandas as pd
 import streamlit as st
 
+
+if 'data_df' not in st.session_state:
+    st.session_state['data_df'] = pd.DataFrame()
+    
 
 pg = st.navigation([
     st.Page("views/home.py", title="Home", icon="🏠"),
@@ -9,3 +14,4 @@ pg = st.navigation([
 
 
 pg.run()
+

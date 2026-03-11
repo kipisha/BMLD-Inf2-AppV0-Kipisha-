@@ -58,3 +58,5 @@ with st.expander("🔬 Biologische Erklärung & Formel"):
     Das Modell berechnet die Zellzahl nach der Formel: $N_t = {n0} \cdot 2^{{({t}/{g})}}$.
     Aktuell haben wir ca. **{round(n_gen, 1)} Verdopplungszyklen** durchlaufen.
     """)
+st.session_state['data_df'] = pd.concat([st.session_state['data_df'], pd.DataFrame([result])])
+st.dataframe(st.session_state['data_df'])
