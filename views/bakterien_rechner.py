@@ -39,7 +39,7 @@ st.divider()
 
 
 st.subheader("Wachstumskurve")
-
+st.line_chart(df.set_index("(Minuten)"))
 
 fig = px.area(df, x="Zeit (Minuten)", y="Bakterienanzahl", 
               title="Exponentielles Wachstum über Zeit",
