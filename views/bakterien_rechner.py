@@ -13,6 +13,9 @@ g = st.sidebar.slider("Generationszeit (min)", 10, 100, 20)
 
 
 nt, n_gen = calculate_bacterial_growth(n0, t, g)
+result_test = calculate_bacterial_growth(n0, t, g)
+st.write(result_test)
+
 result = get_growth_steps(n0, t, g)  
 times = result["data"]["times"]
 counts = result["data"]["counts"]
@@ -39,7 +42,6 @@ st.divider()
 
 
 st.subheader("Wachstumskurve")
-st.line_chart(df.set_index("(Minuten)"))
 
 fig = px.area(df, x="Zeit (Minuten)", y="Bakterienanzahl", 
               title="Exponentielles Wachstum über Zeit",
