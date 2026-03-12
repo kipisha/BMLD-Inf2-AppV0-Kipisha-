@@ -4,11 +4,11 @@ from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 
 data_manager =DataManager(
-    fs_protocol= 'webdav'
+    fs_protocol= 'webdav',
     fs_root_folder="BMLD_APP_DB"
 )
 login_manager = LoginManager(data_manager)
-login_manager.login_register
+login_manager.login_register()
 
 
 if 'data_df' not in st.session_state:
