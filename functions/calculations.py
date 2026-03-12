@@ -47,3 +47,5 @@ def get_growth_steps(n0, t, g, steps=10):
             "counts": counts
         }
     }
+data_manager = DataManager()
+data_manager.save_user_data(st.session_state['data_df'], 'data.csv')
